@@ -44,6 +44,7 @@ use std::borrow::{Borrow, Cow};
 mod owned;
 pub use owned::Owned;
 
+/// Extension to [`ToOwned`]. Avoiding clones where possible
 pub trait IntoOwned<T: ?Sized + ToOwned>: Borrow<T> {
     fn into_owned(self) -> T::Owned;
 }
