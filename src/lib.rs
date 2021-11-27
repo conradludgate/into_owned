@@ -1,35 +1,31 @@
 use std::borrow::{Borrow, Cow};
 pub struct Owned<T>(pub T);
 
-pub trait MaybeOwned<T: ?Sized + ToOwned> {
+pub trait IntoOwned<T: ?Sized + ToOwned>: Borrow<T> {
     fn into_owned(self) -> T::Owned;
-    fn borrow(&self) -> &T;
 }
 
-impl<T: ToOwned + ?Sized> MaybeOwned<T> for &T {
+impl<T: ToOwned + ?Sized> IntoOwned<T> for &T {
     fn into_owned(self) -> T::Owned {
         self.to_owned()
     }
-    fn borrow(&self) -> &T {
-        self
-    }
 }
 
-impl<B: ?Sized + ToOwned> MaybeOwned<B> for Owned<B::Owned> {
-    fn into_owned(self) -> B::Owned {
-        self.0
-    }
+impl<B: ?Sized + ToOwned> Borrow<B> for Owned<B::Owned> {
     fn borrow(&self) -> &B {
         self.0.borrow()
     }
 }
 
-impl<'a, T: ToOwned + ?Sized> MaybeOwned<T> for Cow<'a, T> {
+impl<B: ?Sized + ToOwned> IntoOwned<B> for Owned<B::Owned> {
+    fn into_owned(self) -> B::Owned {
+        self.0
+    }
+}
+
+impl<'a, T: ToOwned + ?Sized> IntoOwned<T> for Cow<'a, T> {
     fn into_owned(self) -> <T as ToOwned>::Owned {
         self.into_owned()
-    }
-    fn borrow(&self) -> &T {
-        Borrow::borrow(self)
     }
 }
 
@@ -53,7 +49,7 @@ fn test() {
         }
     }
 
-    fn foo<S: MaybeOwned<Noisy<str>>>(s: S, requests: &mut Vec<String>) {
+    fn foo<S: IntoOwned<Noisy<str>>>(s: S, requests: &mut Vec<String>) {
         let _ = s.borrow().0.len();
         requests.push(s.into_owned().0);
     }
