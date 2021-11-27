@@ -1,6 +1,17 @@
 //! Provides a way to efficiently get an owned value of a type.
 //!
 //! ```
+//! use into_owned::{IntoOwned, Owned};
+//!
+//! fn check<S: IntoOwned<str>>(s: S) -> String {
+//!     s.into_owned()
+//! }
+//!
+//! let _foo = check("foo"); // will clone
+//! let _bar = check(Owned("bar".to_owned())); // will not clone twice (unlike regular ToOwned)
+//! ```
+//!
+//! ```
 //! # use std::borrow::Cow;
 //! use into_owned::{IntoOwned, Owned};
 //!
