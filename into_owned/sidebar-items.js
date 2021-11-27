@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["Owned","Due to implementation conflicts, [`IntoOwned`] cannot be directly implemented on `T`. So instead, this is a light wrapper that allows the implementation."]],"trait":[["IntoOwned","Extension to [`ToOwned`]. Avoiding clones where possible"]]});

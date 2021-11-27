@@ -1,0 +1,4 @@
+var searchIndex = JSON.parse('{\
+"into_owned":{"doc":"Provides a way to efficiently get an owned value of a type.","t":[12,8,3,11,11,11,11,11,11,11,11,10,11,11,11,11],"n":["0","IntoOwned","Owned","as_ref","borrow","borrow","borrow_mut","from","from","from","into","into_owned","into_owned","try_from","try_into","type_id"],"q":["into_owned","","","","","","","","","","","","","","",""],"d":["","Extension to <code>ToOwned</code>. Avoiding clones where possible","Due to implementation conflicts, <code>IntoOwned</code> cannot be …","","","","","","","","","","","","",""],"i":[1,0,0,1,1,1,1,1,1,1,1,2,1,1,1,1],"f":[null,null,null,[[]],[[]],[[]],[[]],[[]],[[["never",15]]],[[]],[[]],[[]],[[]],[[],["result",4]],[[],["result",4]],[[],["typeid",3]]],"p":[[3,"Owned"],[8,"IntoOwned"]]}\
+}');
+if (window.initSearch) {window.initSearch(searchIndex)};
